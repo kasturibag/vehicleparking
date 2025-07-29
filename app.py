@@ -46,7 +46,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         logout_user()
