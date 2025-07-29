@@ -1,0 +1,35 @@
+<div class="lots-module-wrapper mt-3">
+  <div class="card">
+    <h5 class="card-header">Parking Lot Availability</h5>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Lot Name</th>
+            <th scope="col" class="text-center">Total Spots</th>
+            <th scope="col" class="text-center">Occupied</th>
+            <th scope="col" class="text-center">Available</th>
+            <th scope="col" class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lot_stat in lot_stats %}
+            <tr>
+              <td>{{ lot_stat.lot.locationName }}</td>
+              <td class="text-center">{{ lot_stat.total }}</td>
+              <td class="text-center">{{ lot_stat.occupied }}</td>
+              <td class="text-center">{{ lot_stat.available }}</td>
+              <td class="text-center">
+                {% if lot_stat.status %}
+                  <p class="text-success">Available</p>
+                {% else %}
+                  <p class="text-danger">Not Available</p>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

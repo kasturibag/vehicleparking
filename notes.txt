@@ -1,0 +1,41 @@
+step 1 : Creating Virtual Environment
+1.py -m venv environmentname
+
+step 2: Activating environment  (flaskvehicle is environment name)
+2.E:\VehicleParking>.\flaskvehicle\Scripts\activate
+3.(flaskvehicle) E:\VehicleParking>
+
+step 3: pip3 install flask
+
+---------------------------------------------------------------------------------------------
+
+email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+This allows:
+- Upper/lowercase letters
+- Numbers
+- Dot, underscore, percent, plus, hyphen in local part
+- Domain and subdomain
+- At least 2 letters for TLD
+
+onsubmit="return confirm('Are you sure?');"
+---------------------------------------------------------------------------------------------
+
+Defect Fixed:
+1. Timestamp is not recorded properly in admin dashboard for exit time
+    -> Fixed
+2. Edit lot with increase/descrease spot count issue
+    -> Fixed (decrease functionality working)
+3. Throw error if we try to book location where spots are not available
+    -> Fixed (Show only available locations)
+4. Form validations latest requirement for email, pass & vehicle no
+    -> Fixed (validations added)
+5. Form validation in all forms
+    -> Fixed by adding required, placeholder & patterns
+6. Total_revenue amount calculation
+    -> Fixed by formatting total revenue amount in indian currency
+7. Login page title
+    -> Fixed
+
+Note:
+- Please review all html templates & app.py to understand the codebase & functionality.

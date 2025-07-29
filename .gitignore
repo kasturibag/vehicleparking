@@ -1,0 +1,17 @@
+# Ignore virtual environment
+flaskvehicle/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Optional: Ignore VSCode settings (if using VSCode)
+.vscode/
+
+# Optional: Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+.flaskvehicleScriptsactivate

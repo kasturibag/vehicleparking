@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+  Login Page
+{% endblock %}
+
+{% block content %}
+  {% include 'Header.html' %}
+  <main>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-4 mx-auto my-auto">
+          <div class="card">
+            <div class="card-header">
+              <p class="h5 d-flex justify-content-center">Release Your Parking Spot</p>
+            </div>
+            <div class="card-body">
+              <p>
+                <strong>Spot Id:</strong><span>{{release.id}}</span>
+              </p>
+              <p>
+                <strong>Vehicle:</strong><span>{{release.reserve.vehicleNo}}</span>
+              </p>
+              <p>
+                <strong>Parking Since:</strong><span>{{release.reserve.parking_ts.strftime('%Y-%m-%d %H:%M:%S')}}</span>
+              </p>
+            </div>
+            <div class="card-footer">
+              <form method="POST" action="{{ url_for('release_spot', reserve_id=release.reserve.id)}}">
+                <button class="btn btn-danger btn-sm" type="submit">Release Spot</button>
+              </form>
+              <a href="{{ url_for('user_dashboard')}}" class="btn btn-light btn-sm">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% include 'Footer.html' %}
+{% endblock %}

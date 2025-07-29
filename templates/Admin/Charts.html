@@ -1,0 +1,55 @@
+<div class="lots-module-wrapper mt-3">
+  <div class="container mt-4">
+    <h4>Spot Usage By Lot</h4>
+    <div class="row">
+      <div class="col-md-8">
+        <div style="width: 100%">
+            <canvas id="spotChart"></canvas>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">Total Revenue</div>
+          <div class="card-body">
+            <h5 class="card-title">{{total_revenue}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('spotChart').getContext('2d');
+        const spotChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels | tojson | safe }},
+            datasets: [
+            {
+                label: 'Occupied Spots',
+                data: {{ occupied | tojson | safe }},
+                backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            },
+            {
+                label: 'Available Spots',
+                data: {{ available | tojson | safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.7)'
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                beginAtZero: true
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
+        }
+        });
+    </script>
+  </div>
+</div>

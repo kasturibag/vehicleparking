@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+  Spot Details
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="container">
+      <div class="lots-module-wrapper mt-3">
+        <div class="card">
+          <h5 class="card-header">
+            <div class="d-flex justify-content-between">
+              <div class="h5">Parking Spot in {{lot.locationName}}</div>
+              <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary btn-sm">Back</a>
+            </div>
+          </h5>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Spot ID</th>
+                  <th scope="col" class="text-center">Status</th>
+                  <th scope="col" class="text-center">User Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for spot in spots %}
+                  <tr>
+                    <td>{{ spot.id }}</td>
+                    <td class="text-center">
+                      {% if spot.status %}
+                        <span class="badge bg-danger">Occupied</span>
+                      {% else %}
+                        <span class="badge bg-success">Unoccupied</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if spot.reserve_id %}
+                        <p class="m-0">
+                          <strong>User:</strong><span>{{spot.reserve.booked_by.username}}</span>
+                        </p>
+                        <p class="m-0">
+                          <strong>Email:</strong><span>{{spot.reserve.booked_by.email}}</span>
+                        </p>
+                        <p class="m-0">
+                          <strong>Address:</strong><span>{{spot.lot_booked.address}}</span>
+                        </p>
+                        <p class="m-0">
+                          <strong>Pin:</strong><span>{{spot.lot_booked.pincode}}</span>
+                        </p>
+                        <p class="m-0">
+                          <strong>Vehicle:</strong><span>{{spot.reserve.vehicleNo}}</span>
+                        </p>
+                        <p class="m-0">
+                          <strong>Since:</strong><span>{{spot.reserve.parking_ts.strftime('%Y-%m-%d %H:%M:%S')}}</span>
+                        </p>
+                      {% else %}
+                      <p class="m-0">N/A</p>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

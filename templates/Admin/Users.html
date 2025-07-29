@@ -1,0 +1,25 @@
+<div class="lots-module-wrapper mt-3">
+  <div class="card">
+    <h5 class="card-header">Registered Users</h5>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col" class="text-center">Username</th>
+            <th scope="col" class="text-center">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td class="text-center">{{user.id}}</td>
+              <td class="text-center">{{user.username}}</td>
+              <td class="text-center">{{user.email}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
