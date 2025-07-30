@@ -7,7 +7,7 @@ from models import db, User, Lot, Spot, Reserve
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
-db_name = 'ParkingLotLatest.db'
+db_name = 'ParkingLatest1.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_name}?check_same_thread=False'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '8b15fe3d465f7a5550d1ca63460601f6'
@@ -234,32 +234,23 @@ def edit_lot(lot_id):
 def delete_lot(lot_id):
     lot = Lot.query.get_or_404(lot_id)
 
-    # Get all related spots for the lot
+    # Get all related spots
     spots = Spot.query.filter_by(lot_id=lot.id).all()
 
-    # Check if any spot has a non-null reserve_id
+    # Check if any spot is currently reserved
     has_reservation = any(spot.reserve_id is not None for spot in spots)
-
     if has_reservation:
-        print("Flash should appear now")
-        flash("Cannot delete lot. It contains reserved parking spots.", "warning")
-        return redirect(url_for("admin_dashboard"))
+        flash("Cannot delete lot: One or more spots are currently reserved.", "danger")
+        return redirect(url_for('admin_dashboard'))  # or wherever your admin page is
 
-    # If all spots are unreserved, delete the lot (and optionally its spots)
-    try:
-        # Delete all related spots first if cascade is not set
-        for spot in spots:
-            db.session.delete(spot)
+    # Delete all spots and the lot (cascade works too if relationship is set properly)
+    for spot in spots:
+        db.session.delete(spot)
 
-        db.session.delete(lot)
-        db.session.commit()
-        flash("Lot and unreserved spots deleted successfully.", "success")
-    except Exception as e:
-        db.session.rollback()
-        flash(f"Error deleting lot: {str(e)}", "danger")
-
-    return redirect(url_for("admin_dashboard"))
-
+    db.session.delete(lot)
+    db.session.commit()
+    flash("Parking lot and all its spots deleted successfully.", "success")
+    return redirect(url_for('admin_dashboard'))
 
 
 @app.route('/user/book-spot')

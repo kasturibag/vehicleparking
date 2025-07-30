@@ -61,7 +61,7 @@ class Spot(db.Model):
 
 class Reserve(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    spot_id = db.Column(db.Integer, db.ForeignKey('spot.id'), nullable=False)
+    spot_id = db.Column(db.Integer, db.ForeignKey('spot.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     vehicleNo = db.Column(db.String(20), nullable=False)
     parking_ts = db.Column(db.DateTime, default=get_ist_time)
