@@ -7,7 +7,7 @@ from models import db, User, Lot, Spot, Reserve
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
-db_name = 'ParkingLatest1.db'
+db_name = 'ParkingLatest2.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_name}?check_same_thread=False'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '8b15fe3d465f7a5550d1ca63460601f6'
@@ -271,8 +271,10 @@ def confirm_booking():
         lot_id = request.form['lot']
         vehicle_no = request.form['vehicleNo']
 
+        lot = Lot.query.get_or_404(lot_id)
         spot = Spot.query.filter(Spot.lot_id==lot_id, Spot.status==False).first()
         spot_id = spot.id
+        location = f"{lot.locationName}, {lot.address} - {lot.pincode}"
 
         if spot.status:
             flash("Spot already booked!", "danger")
@@ -283,7 +285,9 @@ def confirm_booking():
         reservation = Reserve(
             spot_id=spot.id,
             user_id=current_user.id,
-            vehicleNo=vehicle_no
+            vehicleNo=vehicle_no,
+            spotNo=spot.id,
+            location=location
         )
         db.session.add(reservation)
         db.session.flush()  # to get reservation.id before commit

@@ -37,22 +37,19 @@
                     <td>
                       {% if spot.reserve_id %}
                         <p class="m-0">
-                          <strong>User:</strong><span>{{spot.reserve.booked_by.username}}</span>
+                          <strong>User: </strong><span>{{spot.reserve.booked_by.username}}</span>
                         </p>
                         <p class="m-0">
-                          <strong>Email:</strong><span>{{spot.reserve.booked_by.email}}</span>
+                          <strong>Email: </strong><span>{{spot.reserve.booked_by.email}}</span>
                         </p>
                         <p class="m-0">
-                          <strong>Address:</strong><span>{{spot.lot_booked.address}}</span>
+                          <strong>Address: </strong><span>{{spot.lot_booked.locationName}}, {{spot.lot_booked.address}} - {{spot.lot_booked.pincode}}</span>
                         </p>
                         <p class="m-0">
-                          <strong>Pin:</strong><span>{{spot.lot_booked.pincode}}</span>
+                          <strong>Vehicle No: </strong><span>{{spot.reserve.vehicleNo}}</span>
                         </p>
                         <p class="m-0">
-                          <strong>Vehicle:</strong><span>{{spot.reserve.vehicleNo}}</span>
-                        </p>
-                        <p class="m-0">
-                          <strong>Since:</strong><span>{{spot.reserve.parking_ts.strftime('%Y-%m-%d %H:%M:%S')}}</span>
+                          <strong>Since: </strong><span>{{spot.reserve.parking_ts.strftime('%Y-%m-%d %H:%M:%S')}}</span>
                         </p>
                       {% else %}
                       <p class="m-0">N/A</p>

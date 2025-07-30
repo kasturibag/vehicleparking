@@ -10,8 +10,8 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">Spot</th>
-            <th scope="col">Location</th>
+            <th scope="col">Lot</th>
+            <th scope="col">Spot No</th>
             <th scope="col" class="text-center">Parking Time</th>
             <th scope="col" class="text-center">Status</th>
             <th scope="col" class="text-center">Action</th>
@@ -20,8 +20,8 @@
         <tbody>
           {% for booked_spot in booked_spots %}
             <tr>
-              <td>{{ booked_spot.spot_reserved.id }}</td>
-              <td>{{booked_spot.spot_reserved.lot_booked.address}}</td>
+              <td>{{booked_spot.location}}</td>
+              <td>{{ booked_spot.spotNo }}</td>
               <td class="text-center">{{ booked_spot.parking_ts.strftime('%Y-%m-%d %H:%M:%S') }}</td>
               <td class="text-center">
                 {% if booked_spot.leaving_ts %}

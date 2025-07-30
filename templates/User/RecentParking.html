@@ -6,7 +6,7 @@
         <thead>
           <tr>
             <th scope="col">Lot</th>
-            <th scope="col" class="text-center">Spot ID</th>
+            <th scope="col" class="text-center">Spot No</th>
             <th scope="col" class="text-center">Vehicle</th>
             <th scope="col" class="text-center">Parked From</th>
             <th scope="col" class="text-center">Parked To</th>
@@ -17,8 +17,8 @@
           {% for booked_spot in booked_spots %}
             {% if booked_spot.leaving_ts %}
               <tr>
-                <td>{{booked_spot.spot_reserved.lot_booked.address}}</td>
-                <td class="text-center">{{booked_spot.spot_reserved.id}}</td>
+                <td>{{booked_spot.location}}</td>
+                <td class="text-center">{{booked_spot.spotNo}}</td>
                 <td class="text-center">{{booked_spot.vehicleNo}}</td>
                 <td class="text-center">{{booked_spot.parking_ts.strftime('%Y-%m-%d %H:%M:%S')}}</td>
                 <td class="text-center">{{booked_spot.leaving_ts.strftime('%Y-%m-%d %H:%M:%S')}}</td>

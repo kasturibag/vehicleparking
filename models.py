@@ -67,6 +67,8 @@ class Reserve(db.Model):
     parking_ts = db.Column(db.DateTime, default=get_ist_time)
     leaving_ts = db.Column(db.DateTime, nullable=True)
     cost = db.Column(db.Float, default=0)
+    location = db.Column(db.String(200), nullable=False)
+    spotNo = db.Column(db.Integer, nullable=False)
 
     booked_by = db.relationship('User', back_populates='user_bookings')
     reserved_booking = db.relationship('Spot', foreign_keys='Spot.reserve_id', back_populates='reserve')
